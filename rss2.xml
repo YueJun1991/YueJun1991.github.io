@@ -1,284 +1,31 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
-
-
-
-
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="translate," />
-
-
-
-
-
-  <link rel="alternate" href="/rss2.xml" title="Less complaining, More thinking" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
-
-
-
-
-
-
-<meta name="description" content="本文為How to Use Core Spotlight Framework in iOS 9的翻譯每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 Core Spotlight 框架，它靜靜地等待在那邊讓開發者們使用它新的API">
-<meta property="og:type" content="article">
-<meta property="og:title" content="(譯)如何在iOS 9中使用Core Spotlight框架">
-<meta property="og:url" content="http://yoursite.com/2016/01/15/如何在iOS 9中使用Core Spotlight框架/index.html">
-<meta property="og:site_name" content="Less complaining, More thinking">
-<meta property="og:description" content="本文為How to Use Core Spotlight Framework in iOS 9的翻譯每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 Core Spotlight 框架，它靜靜地等待在那邊讓開發者們使用它新的API">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/core-spotlight-framework.jpg">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_1_app_working-compressor.gif">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_2_final_sample-compressor.gif">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_3_movie_plist_sample.png">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_4_custom_cell_ib.png">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_5_first_search-compressor.gif">
-<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2015/12/t46_2_final_sample-compressor.gif">
-<meta property="og:updated_time" content="2016-01-15T05:38:52.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="(譯)如何在iOS 9中使用Core Spotlight框架">
-<meta name="twitter:description" content="本文為How to Use Core Spotlight Framework in iOS 9的翻譯每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 Core Spotlight 框架，它靜靜地等待在那邊讓開發者們使用它新的API">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
-  <title> (譯)如何在iOS 9中使用Core Spotlight框架 | Less complaining, More thinking </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
-
-  
-
-
-
-
-
-
-  
-  
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title><![CDATA[Less complaining, More thinking]]></title>
+    <link>http://yoursite.com/</link>
+    <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
+    <description><![CDATA[An independent iOS developer. Like coding and thinking.]]></description>
+    <pubDate>Fri, 15 Jan 2016 05:38:52 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
     
-  
+    <item>
+      <title><![CDATA[(譯)如何在iOS 9中使用Core Spotlight框架]]></title>
+      <link>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</link>
+      <guid>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</guid>
+      <pubDate>Thu, 14 Jan 2016 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
+<p>Core Spotlight(CS)框架，是更大型API的集合，以 <em>Search APIs</em> 聞名，這給了開發者們機會去顯著提高他們App被訪問的可發現性，可見性和易用性，這是在以前iOS版本中完全不可能被做到的。Search APIs讓使用者與開發者的聯繫更加緊密，前者可以以更新更快的方式來到達後者的App，後者也可以從前者那獲得更多更迅速的響應。除了Core Spotlight，還有其他新的搜索特性包括在iOS 9中（這裡只是做個介紹）：</p>
+<ol><br><li>新的方法和屬性存在與 <em>NSUserActivity</em> 類中（這是用來負責存儲App狀態以為了能讓App在稍後的時間里恢復）。</li><br><li><em>web markup</em> 是用來讓網頁在裝置中被搜索到。</li><br><li><em>universal links</em> 是讓App在網頁鏈接中被直接啟動。</li><br></ol>
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Less complaining, More thinking</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">Talk is cheap, show me your coding.</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu ">
+<p>我們不會全部處理上述所說的三個方面，而我們將會看到對於Core Spotlight框架的細節。在那之前，我們需要介紹一下這個框架。</p>
+<p><img alt="core-spotlight-framework" src="http://www.appcoda.com/wp-content/uploads/2015/12/core-spotlight-framework.jpg"/></p>
+<p><a href="https://developer.apple.com/library/ios/documentation/CoreSpotlight/Reference/CoreSpotlight_Framework/">Core Spotlight framework</a> 讓App中的數據 <em>可搜索化</em> ，以及隨後對於系統反饋的搜索結果回傳到App，并在其中打開。這讓使用者可以在第一時間從應用中搜尋到數據（而以前只能搜索到Apple原生的應用的資訊），並且相互作用，這是相當令人印象深刻的變革。按說用戶可以與相關的自定義應用的搜索結果進行互動，而我的意思是，不僅應用程序將因為搜索結果記錄而自動啟動，開發者也同時將用戶吸引到特定視圖控制器(specific view controllers)，這些最合適最恰當的數據就顯示在Spotlight中。</p>]]>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
-            
-            首頁
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
-            
-            分類
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
-            
-            歸檔
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
-            
-            標籤
-          </a>
-        </li>
-      
-
-      
-      
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                (譯)如何在iOS 9中使用Core Spotlight框架
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-15T00:00:00+08:00" content="2016-01-15">
-              2016-01-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Translation/" itemprop="url" rel="index">
-                    <span itemprop="name">Translation</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/" target="_blank" rel="external">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
+      </description>
+      <content:encoded><![CDATA[<h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/" target="_blank" rel="external">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
 <p>Core Spotlight(CS)框架，是更大型API的集合，以 <em>Search APIs</em> 聞名，這給了開發者們機會去顯著提高他們App被訪問的可發現性，可見性和易用性，這是在以前iOS版本中完全不可能被做到的。Search APIs讓使用者與開發者的聯繫更加緊密，前者可以以更新更快的方式來到達後者的App，後者也可以從前者那獲得更多更迅速的響應。除了Core Spotlight，還有其他新的搜索特性包括在iOS 9中（這裡只是做個介紹）：</p>
 <ol><br><li>新的方法和屬性存在與 <em>NSUserActivity</em> 類中（這是用來負責存儲App狀態以為了能讓App在稍後的時間里恢復）。</li><br><li><em>web markup</em> 是用來讓網頁在裝置中被搜索到。</li><br><li><em>universal links</em> 是讓App在網頁鏈接中被直接啟動。</li><br></ol>
 
@@ -587,440 +334,127 @@ import MobileCoreServices
 <p>你可以在Twitter或<a href="http://www.appcoda.com.tw/forum/" target="_blank" rel="external">AppCoda討論區</a>中聯繫我并隨時歡迎你與我交流。</p>
 <p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
 <p>My Blog: <a href="/">https://yuejun1991.github.io</a></p>
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/translate/" rel="tag">#translate</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/01/01/2015年回顧與總結/" rel="next" title="2015年回顧與總結">
-                <i class="fa fa-chevron-left"></i> 2015年回顧與總結
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
+]]></content:encoded>
+      <comments>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/#disqus_thread</comments>
+    </item>
     
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目錄
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            本站概覽
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="images/head.jpg"
-               alt="Yue Jun" />
-          <p class="site-author-name" itemprop="name">Yue Jun</p>
-          <p class="site-description motion-element" itemprop="description">An independent iOS developer. Like coding and thinking.</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">文章</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">分類</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">標籤</span>
-              </a>
-          </div>
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/rss2.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/YueJun1991" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> github
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/Lanaya_HSIEH" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> twitter
-                  
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.weibo.com/u/1679063565?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">
-                  
-                    <i class="fa fa-globe"></i> weibo
-                  
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><span class="nav-number">1.</span> <span class="nav-text">本文為How to Use Core Spotlight Framework in iOS 9的翻譯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">關於範例App</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">加載和展示樣品的數據</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">展示數據細節</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">對於Spotlight的索引數據</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">實現指向性登入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">譯者介紹</span></a></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Yue Jun</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
-</div>
-
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top"></div>
-  </div>
-
-  
-
-
-  
-
-
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
-
-
-
-  
-  
-
-  
-  
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-  
-  
-
-  
-  
-
-
-</body>
-</html>
+    <item>
+      <title><![CDATA[2015年回顧與總結]]></title>
+      <link>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/</link>
+      <guid>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/</guid>
+      <pubDate>Thu, 31 Dec 2015 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>2015年，是我人生中眾多重大變化的其中一年，並且非常關鍵。我希望能對2015年進行足夠的回顧與總結，從而分析出我變化了什麼，強化了什麼，對什麼還有不足。</p>
+<p>2015年，最需要感謝的是我的父母，妹妹，我家裡的所有人，以及狗狗Q比。</p>
+<p>其次是我在內地的]]>
+      </description>
+      <content:encoded><![CDATA[<p>2015年，是我人生中眾多重大變化的其中一年，並且非常關鍵。我希望能對2015年進行足夠的回顧與總結，從而分析出我變化了什麼，強化了什麼，對什麼還有不足。</p>
+<p>2015年，最需要感謝的是我的父母，妹妹，我家裡的所有人，以及狗狗Q比。</p>
+<p>其次是我在內地的同學，田田，小雨，以及那些不斷支持、鼓勵我的人。</p>
+<p>最後是我自己。</p>
+<h2 id="1-_u5B78_u7FD2_u4E86_u54EA_u4E9B_u6280_u80FD_u53CA_u990A_u6210_u7FD2_u6163"><a href="#1-_u5B78_u7FD2_u4E86_u54EA_u4E9B_u6280_u80FD_u53CA_u990A_u6210_u7FD2_u6163" class="headerlink" title="1.學習了哪些技能及養成習慣"></a>1.學習了哪些技能及養成習慣</h2><h3 id="u6280_u80FD"><a href="#u6280_u80FD" class="headerlink" title="技能"></a>技能</h3><p>1.iOS程式開發，程式語言主要是Swift。</p>
+<p>2.Photoshop的使用，用來簡單修圖和設計海報。</p>
+<p>3.MarkDown語法的學習與使用。</p>
+<p>4.對UI開發有初步的了解。</p>
+<h3 id="u7FD2_u6163"><a href="#u7FD2_u6163" class="headerlink" title="習慣"></a>習慣</h3><p>1.使用過時間管理法，但後來放棄了。現在使用番茄工作法，一個番茄鐘大概在25﹣60分鐘內。</p>
+<p>2.早起，基本在6﹣8點起床。</p>
+<p>3.開始逐漸養成長時間coding的習慣。</p>
+<p>4.初步開始在博客上總結。</p>
+<p>5.2015年下半年開始不斷記賬。</p>
+<p>6.看英語原文書，主要是程式技術方面。</p>
+<p>7.在新浪微博和Twitter上關注iOS開發人員和設計方面。</p>
+<p>8.大量減少自己玩遊戲的時間。</p>
+<p>9.Coding時習慣聽音樂，並且不習慣外界有干擾。</p>
+<p>10.每週對RescueTime的固定回報進行總結分析。</p>
+<p>11.用Sleep Better來追蹤自己的睡眠。</p>
+<h2 id="2-_u4EA4_u7E54_u7684_u4EBA_u8207_u4E8B"><a href="#2-_u4EA4_u7E54_u7684_u4EBA_u8207_u4E8B" class="headerlink" title="2.交織的人與事"></a>2.交織的人與事</h2><p>2015年4月27日，我正式開始服為期一年的兵役。兵役期間，我在區公所服役，每天和一般公務員一樣上下班。在公所的替代役主要幫忙進行清掃、雜事處理、排列佈置相關活動等，另外有所擅長的人就需要善用所長，比如我會Photoshop方面的應用，那我就幫各個課室做了許多海報，平均下來一個月在2﹣3張。</p>
+<p>後來參加了臺中市舉辦的替代役創意爭選活動，代表了我們區公所得到了二等獎（可惜沒有拿第一），做了一個關於兵役相關方面資料的查詢APP。不過我做的并沒有太好，當時程式水平不是很夠，現在回頭來看都非常不合格。</p>
+<p>之後民政局讓我做了一個關於役男資料的排版。在最近做了一個關於電話卡正面的封面圖，這兩個都被採納了。</p>
+<p>就我看來，台灣學生仍然過於理想，卻安於現狀。與此同時，對待同輩或小一輩人物，不僅不尊重對方人格，且霸陵現象非常嚴重，而他們自己又並未意識到這些問題，依舊嬉笑怒駡，語言粗俗低下。</p>
+<p>或許是我自身不善於和人交流，或過於冷漠，專注于自身，而不願加入或制止他們，也和我自身能力的不足有很大的關係。我在兵役期間，也多少遇到了被冷漠或無意識排擠，我也并不想要對目前公所所存在替代役，尋求幫助。而我也依舊保持著該需要我協助就站出來幫忙，該冷眼旁觀而專注于自身發展，便無視外界一切人。</p>
+<p>因而2015年我對台灣的學生的大致印象，并不太好。或許是小島國思想封閉以及台灣這十幾年經濟的落寞，台灣學生的思維格局并沒有走出台灣，主要還是以“小確幸”為人生第一要緊事。台灣同樣也是，政治混亂，新聞媒體肆虐，狂舞台灣。無論是食安、黨派、房價、薪資、兩岸等問題，都是台灣人目前還沒辦法解決的各個病痛。台灣雖然醫學世界有名，卻沒辦法合理手術自己身上那顆巨大的腫瘤。</p>
+<h2 id="3-_u5927_u81F4_u90FD_u770B_u4E86_u54EA_u4E9B_u66F8"><a href="#3-_u5927_u81F4_u90FD_u770B_u4E86_u54EA_u4E9B_u66F8" class="headerlink" title="3.大致都看了哪些書"></a>3.大致都看了哪些書</h2><p>今年閱讀量大約在25﹣30本書左右，同時閱讀了大量Blog，網站文章，微信公眾號，簡書、知乎、微博、Twitter資源等等。另外還看了很多電影，但是我只看不喜歡寫影評，因而就沒有進行統計。</p>
+<p>有的書看了不止一次，像《把時間當做朋友》就至少看了三次，仍然覺得還有很多地方可以學習。</p>
+<p>以下書籍不分閱讀順序，10名以後無好壞排序，10名以內的書都值得看3遍以上。</p>
+<p>1.《賈伯斯傳》</p>
+<p>2.《把時間當做朋友》</p>
+<p>3.《iOS_Apprentice》系列，共四本，By Ray WenderLich家</p>
+<p>4.《三體》</p>
+<p>5.《成為賈伯斯──天才巨星的挫敗與孕成》</p>
+<p>6.《演算法統治世界》</p>
+<p>7.《養成iOS8APP──程式設計實力的25堂課》</p>
+<p>8.《2014﹣2019經濟大懸崖》</p>
+<p>9.《微反應》</p>
+<p>10.《內向者的優勢》</p>
+<p>11.《這個設計好在哪？》</p>
+<p>12.《大和魂》</p>
+<p>13.《走向世界！哈佛、牛津教你如何鍛鍊思考力》</p>
+<p>14.《奇特的一生》</p>
+<p>15.《黑客與畫家》</p>
+<p>16.《我是一個算命先生2》</p>
+<p>17.《深度學習的藝術》</p>
+<p>18.《過把癮就死》</p>
+<p>19.《拆掉思維里的墻》</p>
+<p>20.《高效人士的7種習慣》</p>
+<p>21.《IT人的MacTalk》</p>
+<p>22.《不看盤投資術》</p>
+<p>23.《20幾歲就定位》</p>
+<p>24.《學習之道》</p>
+<p>25.《我也曾經上班一個禮拜就辭職》</p>
+<p>26.《創業時，我們在知乎聊什麼？》</p>
+<p>27.《北洋裂變：軍閥與五四》</p>
+<h2 id="2016_u5E74_u4E4B_u9032_u4E00_u6B65_u7684_u6253_u7B97"><a href="#2016_u5E74_u4E4B_u9032_u4E00_u6B65_u7684_u6253_u7B97" class="headerlink" title="2016年之進一步的打算"></a>2016年之進一步的打算</h2><p>1.進一步增加每天的Coding時間，同時閱讀GitHub上的源碼。</p>
+<p>2.做出2件以上的App。</p>
+<p>3.盡力熟練Objective-C。</p>
+<p>4.欣賞更多設計作品。</p>
+<p>5.爭取閱讀30﹣40本書。</p>
+<p>6.每週鍛鍊1﹣2小時，養好身體。</p>
+<p>7.提高每天背單詞的數量，提高英語能力。</p>
+<p>8.定期寫博客對知識進行總結與分享。</p>
+<h2 id="4-_u8CFC_u8CB7_u7684_u90A3_u4E9B_u6771_u897F"><a href="#4-_u8CFC_u8CB7_u7684_u90A3_u4E9B_u6771_u897F" class="headerlink" title="4.購買的那些東西"></a>4.購買的那些東西</h2><p>1.Macbook Pro, 2015年2月13日購買。</p>
+<p>2.iPad Air 2, 2015年7月11日購買。</p>
+<p>3.克補＋鋅，補充維他命B群等元素。</p>
+<p>4.大量的書。</p>
+<p>5.GU上的一件黑色大衣，新揹包。</p>
+<p>6.巨匠補習班上的技能學習。</p>
+<h2 id="5-Mac_u4E0A_u4F7F_u7528_u7684_u8EDF_u4EF6"><a href="#5-Mac_u4E0A_u4F7F_u7528_u7684_u8EDF_u4EF6" class="headerlink" title="5.Mac上使用的軟件"></a>5.Mac上使用的軟件</h2><p>1.Xcode.</p>
+<p>2.Photoshop CC 2015</p>
+<p>3.Reeder</p>
+<p>4.Pomodoro One</p>
+<p>5.GitHub Desktop</p>
+<p>6.MacDown</p>
+<p>7.Twitter</p>
+<p>8.AppCleaner</p>
+<p>9.Battery Health</p>
+<p>10.CleanMyMac 3</p>
+<p>11.BetterZip 3.0</p>
+<p>12.Hear</p>
+<p>13.Infinit</p>
+<p>14.Hearthstone</p>
+<p>15.Manico</p>
+<p>16.RescueTime</p>
+<p>17.This War of Mine</p>
+<h2 id="6-iPad_u4E0A_u4F7F_u7528_u7684_u8EDF_u4EF6"><a href="#6-iPad_u4E0A_u4F7F_u7528_u7684_u8EDF_u4EF6" class="headerlink" title="6.iPad上使用的軟件"></a>6.iPad上使用的軟件</h2><p>1.即時天氣</p>
+<p>2.Gmail</p>
+<p>3.WeChat</p>
+<p>4.知乎日報、知乎、開發者頭條</p>
+<p>5.Sleep Better</p>
+<p>6.半糖</p>
+<p>7.AppSo</p>
+<p>8.Infinit</p>
+<p>9.扇貝單詞</p>
+<p>10.CodeHub</p>
+<p>11.iBooks</p>
+<p>12.Monument、Cytus、Implosion</p>
+<p>13.Pinterest</p>
+<p>14.爐石戰記</p>
+<p>15.微博</p>
+<p>16.Twitter</p>
+<p>17.Kindle</p>
+<p>18.網易公開課</p>
+]]></content:encoded>
+      <comments>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/#disqus_thread</comments>
+    </item>
+    
+  </channel>
+</rss>
