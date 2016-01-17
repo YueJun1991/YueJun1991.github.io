@@ -7,8 +7,93 @@
     <link>http://yoursite.com/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[iOS developer. Like coding and reading.]]></description>
-    <pubDate>Fri, 15 Jan 2016 05:38:52 GMT</pubDate>
+    <pubDate>Sun, 17 Jan 2016 12:28:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics]]></title>
+      <link>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/</link>
+      <guid>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/</guid>
+      <pubDate>Sat, 16 Jan 2016 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
+<p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自]]>
+      </description>
+      <content:encoded><![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
+<p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="func"><span class="keyword">func</span> <span class="title">registerClass</span><span class="params">(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="func"><span class="keyword">func</span> <span class="title">registerNib</span><span class="params">(nib: UINib?, forCellWithReuseIdentifier identifier: String)</span></span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">一種被廣泛使用來處理註冊和出列的解決方法是為reuse identifier(複用識別)宣告一個常數:</span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>private let reuseIdentifier = “BookCell”</p>
+<p>class BookListViewController: UIViewController, UICollectionViewDataSource {</p>
+<pre><code>@IBOutlet private weak var collectionView: UICollectionView!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let nib = UINib(nibName: &quot;BookCell&quot;, bundle: nil)
+    self.collectionView.registerNib(nib, forCellWithReuseIdentifier: reuseIdentifier)
+}
+
+func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&gt; UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+
+    if let bookCell = cell as? BookCell {
+        // TODO: configure cell
+    }
+
+    return cell
+}
+</code></pre><p>}<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">讓我們來嘗試概括一下這段<span class="preprocessor">code</span>以及讓它變得更簡單和安全吧。</span><br><span class="line"></span><br><span class="line">首先，把我們的App中每一個的reuse identifier提取出來。這樣我們只能使用自定義cell類中的名字來作為一個缺省的reuse identifier。</span><br><span class="line"></span><br><span class="line">我們可以為Reuseable Views創建一個協議(protocol)並且為UIView的子類提供一個缺省的實現限制。</span><br></pre></td></tr></table></figure></p>
+<p>protocol ReusableView: class {<br>    static var defaultReuseIdentifier: String { get }<br>}</p>
+<p>extension ReusableView where Self: UIView {<br>    static var defaultReuseIdentifier: String {<br>        return NSStringFromClass(self)<br>    }<br>}</p>
+<p>extension UICollectionViewCell: ReusableView {<br>}<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然後讓UICollectionViewCell遵從ReusableView協議，就可以給每一個cell的子類別一個獨一無二的reuse identifier了。</span><br><span class="line"></span><br><span class="line"><span class="escape">``</span><span class="escape">`</span><br><span class="line"></span>let identifier = BookCell.defaultReuseIdentifier</span><br><span class="line">// identifier = <span class="string">"MyModule.BookCell"</span></span><br><span class="line"><span class="escape">``</span><span class="escape">`</span><br><span class="line"></span></span><br><span class="line">接下來我們使用加載Nib的方式來擺脫麻煩的編寫字串(hard-coded string)。</span><br><span class="line"></span><br><span class="line">我們繼續為Nib Loadable Views創建一個協議，並且為擴展協議的範圍提供一個缺省值。</span><br></pre></td></tr></table></figure></p>
+<p>protocol NibLoadableView: class {<br>    static var nibName: String { get }<br>}</p>
+<p>extension NibLoadableView where Self: UIView {<br>    static var nibName: String {<br>        return NSStringFromClass(self).componentsSeparatedByString(“.”).last!<br>    }<br>}</p>
+<p>extension BookCell: NibLoadableView {<br>}<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">通過讓BookCell類遵從NIbLoadableView協議，我們現在有一個很安全的方式取得Nib的名字了。</span><br><span class="line"></span><br><span class="line"><span class="escape">``</span><span class="escape">`</span><br><span class="line"></span>let nibName = BookCell.nibName</span><br><span class="line">// nibName = <span class="string">"BookCell"</span></span><br><span class="line"><span class="escape">``</span><span class="escape">`</span><br><span class="line"></span></span><br><span class="line">如果你使用一個來自XIB文件的不一樣的名字，而不是Xcode本身提供的，你永遠可以覆寫(override)nibName屬性的缺省值。</span><br><span class="line"></span><br><span class="line">有了這兩個協議之後，我們就可以使用Swift的基本規則去擴展UICollectionView，達到更簡單註冊和出列cell。</span><br></pre></td></tr></table></figure></p>
+<p>extension UICollectionView {</p>
+<pre><code>func register&lt;T: UICollectionViewCell where T: ReusableView&gt;(_: T.Type) {
+    registerClass(T.self, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+}
+
+func register&lt;T: UICollectionViewCell where T: ReusableView, T: NibLoadableView&gt;(_: T.Type) {
+    let bundle = NSBundle(forClass: T.self)
+    let nib = UINib(nibName: T.nibName, bundle: bundle)
+
+    registerNib(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+}
+
+func dequeueReusableCell&lt;T: UICollectionViewCell where T: ReusableView&gt;(forIndexPath indexPath: NSIndexPath) -&gt; T {
+    guard let cell = dequeueReusableCellWithReuseIdentifier(T.defaultReuseIdentifier, forIndexPath: indexPath) as? T else {
+        fatalError(&quot;Could not dequeue cell with identifier: \(T.defaultReuseIdentifier)&quot;)
+    }
+
+    return cell
+}    
+</code></pre><p>}<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#35531;&#27880;&#24847;&#65292;&#25105;&#20497;&#21109;&#24314;&#20102;&#20841;&#20491;&#35722;&#21270;&#30340;register&#26041;&#27861;&#65292;&#19968;&#20491;&#26159;&#23526;&#29694;cell&#30340;&#23376;&#39006;&#21029;ReusableView&#65292;&#19968;&#20491;&#21063;&#21487;&#20197;&#36890;&#29992;&#26044;ReuseableView&#21644;NibLoadableView&#12290;&#36889;&#26159;&#38750;&#24120;&#36969;&#21512;&#23565;&#21934;&#29544;&#30340;view controller&#29992;&#26044;&#29305;&#23450;&#30340;cell&#35387;&#20874;&#26041;&#27861;(**This nicely decouples the view controller from the specific cell registration method**)&#12290;&#10;&#10;&#21478;&#22806;&#19968;&#20491;&#22909;&#30340;&#32048;&#31680;&#22312;&#26044;dequeueReusableCell&#26041;&#27861;&#19981;&#38656;&#35201;&#21435;&#20351;&#29992;&#20219;&#20309;&#24489;&#29992;&#30340;&#35672;&#21029;&#30908;&#65292;&#32780;&#21482;&#38656;&#35201;&#23565;&#20854;&#22238;&#20659;&#30340;&#20540;&#20351;&#29992;cell&#30340;&#23376;&#39006;&#21029;&#12290;&#10;&#10;&#29694;&#22312;cell&#30340;&#35387;&#20874;&#21644;&#20986;&#21015;&#30475;&#36215;&#20358;&#26371;&#26356;&#21152;&#20986;&#33394;&#20102;&#65306;</span><br></pre></td></tr></table></figure></p>
+<p>class BookListViewController: UIViewController, UICollectionViewDataSource {</p>
+<pre><code>@IBOutlet private weak var collectionView: UICollectionView!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.collectionView.register(BookCell.self)
+}
+
+func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&gt; UICollectionViewCell {
+
+    let cell: BookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+
+    // TODO: configure cell
+
+    return cell
+}
+...
+</code></pre><p>}<br>```</p>
+<h2 id="u7D50_u5C3E"><a href="#u7D50_u5C3E" class="headerlink" title="結尾"></a>結尾</h2><p>如果你之前學習過Objective-C，去研究Swift的強大的特性比如擴展協定和一般的特性，以找到更多選擇和更優雅的方式去處理Cocoa類。</p>
+<h3 id="u2014_u2014_u2014"><a href="#u2014_u2014_u2014" class="headerlink" title="———-"></a>———-</h3><p>本文以獲得原作者的翻譯許可。</p>
+<h5 id="u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002"><a href="#u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002" class="headerlink" title="如有翻譯不足之處，請多多包含與指教。"></a>如有翻譯不足之處，請多多包含與指教。</h5><p><a href="https://medium.com/@gonzalezreal/ios-cell-registration-reusing-with-swift-protocol-extensions-and-generics-c5ac4fb5b75e#.jnkx73nhv" target="_blank" rel="external">原文地址在此</a></p>
+]]></content:encoded>
+      <comments>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[(譯)如何在iOS 9中使用Core Spotlight框架]]></title>

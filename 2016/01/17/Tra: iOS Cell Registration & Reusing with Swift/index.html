@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="translate," />
 
 
 
@@ -59,15 +59,22 @@
 
 
 
-<meta name="description" content="iOS developer. Like coding and reading.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Less complaining, More thinking">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。
+UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:
+1234567public func registerClass(cellClass: AnyClass?, forCel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics">
+<meta property="og:url" content="http://yoursite.com/2016/01/17/Tra: iOS Cell Registration & Reusing with Swift/index.html">
 <meta property="og:site_name" content="Less complaining, More thinking">
-<meta property="og:description" content="iOS developer. Like coding and reading.">
+<meta property="og:description" content="如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。
+UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:
+1234567public func registerClass(cellClass: AnyClass?, forCel">
+<meta property="og:updated_time" content="2016-01-17T12:28:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Less complaining, More thinking">
-<meta name="twitter:description" content="iOS developer. Like coding and reading.">
+<meta name="twitter:title" content="(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics">
+<meta name="twitter:description" content="如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。
+UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:
+1234567public func registerClass(cellClass: AnyClass?, forCel">
 
 
 
@@ -85,7 +92,7 @@
   };
 </script>
 
-  <title> Less complaining, More thinking </title>
+  <title> (譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics | Less complaining, More thinking </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -102,9 +109,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -193,15 +198,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
 
+  <div id="posts" class="posts-expand">
     
-
-    
-    
-
-    
-      
 
   
   
@@ -221,10 +220,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/01/17/Tra: iOS Cell Registration & Reusing with Swift/" itemprop="url">
-                  (譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics
-                </a>
+                (譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics
               
             
           </h1>
@@ -281,9 +277,7 @@
       
 
       
-        
-          
-            <p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
+        <p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
 <p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="func"><span class="keyword">func</span> <span class="title">registerClass</span><span class="params">(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="func"><span class="keyword">func</span> <span class="title">registerNib</span><span class="params">(nib: UINib?, forCellWithReuseIdentifier identifier: String)</span></span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">一種被廣泛使用來處理註冊和出列的解決方法是為reuse identifier(複用識別)宣告一個常數:</span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
 <p>private let reuseIdentifier = “BookCell”</p>
@@ -356,271 +350,45 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
 <h3 id="u2014_u2014_u2014"><a href="#u2014_u2014_u2014" class="headerlink" title="———-"></a>———-</h3><p>本文以獲得原作者的翻譯許可。</p>
 <h5 id="u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002"><a href="#u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002" class="headerlink" title="如有翻譯不足之處，請多多包含與指教。"></a>如有翻譯不足之處，請多多包含與指教。</h5><p><a href="https://medium.com/@gonzalezreal/ios-cell-registration-reusing-with-swift-protocol-extensions-and-generics-c5ac4fb5b75e#.jnkx73nhv" target="_blank" rel="external">原文地址在此</a></p>
 
-          
-        
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/15/如何在iOS 9中使用Core Spotlight框架/" itemprop="url">
-                  (譯)如何在iOS 9中使用Core Spotlight框架
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-15T00:00:00+08:00" content="2016-01-15">
-              2016-01-15
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Translation/" itemprop="url" rel="index">
-                    <span itemprop="name">Translation</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
+            <a href="/tags/translate/" rel="tag">#translate</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
-<p>Core Spotlight(CS)框架，是更大型API的集合，以 <em>Search APIs</em> 聞名，這給了開發者們機會去顯著提高他們App被訪問的可發現性，可見性和易用性，這是在以前iOS版本中完全不可能被做到的。Search APIs讓使用者與開發者的聯繫更加緊密，前者可以以更新更快的方式來到達後者的App，後者也可以從前者那獲得更多更迅速的響應。除了Core Spotlight，還有其他新的搜索特性包括在iOS 9中（這裡只是做個介紹）：</p>
-<ol><br><li>新的方法和屬性存在與 <em>NSUserActivity</em> 類中（這是用來負責存儲App狀態以為了能讓App在稍後的時間里恢復）。</li><br><li><em>web markup</em> 是用來讓網頁在裝置中被搜索到。</li><br><li><em>universal links</em> 是讓App在網頁鏈接中被直接啟動。</li><br></ol>
-
-<p>我們不會全部處理上述所說的三個方面，而我們將會看到對於Core Spotlight框架的細節。在那之前，我們需要介紹一下這個框架。</p>
-<p><img alt="core-spotlight-framework" src="http://www.appcoda.com/wp-content/uploads/2015/12/core-spotlight-framework.jpg"/></p>
-<p><a href="https://developer.apple.com/library/ios/documentation/CoreSpotlight/Reference/CoreSpotlight_Framework/">Core Spotlight framework</a> 讓App中的數據 <em>可搜索化</em> ，以及隨後對於系統反饋的搜索結果回傳到App，并在其中打開。這讓使用者可以在第一時間從應用中搜尋到數據（而以前只能搜索到Apple原生的應用的資訊），並且相互作用，這是相當令人印象深刻的變革。按說用戶可以與相關的自定義應用的搜索結果進行互動，而我的意思是，不僅應用程序將因為搜索結果記錄而自動啟動，開發者也同時將用戶吸引到特定視圖控制器(specific view controllers)，這些最合適最恰當的數據就顯示在Spotlight中。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/15/如何在iOS 9中使用Core Spotlight框架/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/15/如何在iOS 9中使用Core Spotlight框架/" rel="next" title="(譯)如何在iOS 9中使用Core Spotlight框架">
+                <i class="fa fa-chevron-left"></i> (譯)如何在iOS 9中使用Core Spotlight框架
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/01/2015年回顧與總結/" itemprop="url">
-                  2015年回顧與總結
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-01-01T00:00:00+08:00" content="2016-01-01">
-              2016-01-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Thinking/" itemprop="url" rel="index">
-                    <span itemprop="name">Thinking</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>2015年，是我人生中眾多重大變化的其中一年，並且非常關鍵。我希望能對2015年進行足夠的回顧與總結，從而分析出我變化了什麼，強化了什麼，對什麼還有不足。</p>
-<p>2015年，最需要感謝的是我的父母，妹妹，我家裡的所有人，以及狗狗Q比。</p>
-<p>其次是我在內地的同學，田田，小雨，以及那些不斷支持、鼓勵我的人。</p>
-<p>最後是我自己。</p>
-<h2 id="1-_u5B78_u7FD2_u4E86_u54EA_u4E9B_u6280_u80FD_u53CA_u990A_u6210_u7FD2_u6163"><a href="#1-_u5B78_u7FD2_u4E86_u54EA_u4E9B_u6280_u80FD_u53CA_u990A_u6210_u7FD2_u6163" class="headerlink" title="1.學習了哪些技能及養成習慣"></a>1.學習了哪些技能及養成習慣</h2><h3 id="u6280_u80FD"><a href="#u6280_u80FD" class="headerlink" title="技能"></a>技能</h3><p>1.iOS程式開發，程式語言主要是Swift。</p>
-<p>2.Photoshop的使用，用來簡單修圖和設計海報。</p>
-<p>3.MarkDown語法的學習與使用。</p>
-<p>4.對UI開發有初步的了解。</p>
-<h3 id="u7FD2_u6163"><a href="#u7FD2_u6163" class="headerlink" title="習慣"></a>習慣</h3><p>1.使用過時間管理法，但後來放棄了。現在使用番茄工作法，一個番茄鐘大概在25﹣60分鐘內。</p>
-<p>2.早起，基本在6﹣8點起床。</p>
-<p>3.開始逐漸養成長時間coding的習慣。</p>
-<p>4.初步開始在博客上總結。</p>
-<p>5.2015年下半年開始不斷記賬。</p>
-<p>6.看英語原文書，主要是程式技術方面。</p>
-<p>7.在新浪微博和Twitter上關注iOS開發人員和設計方面。</p>
-<p>8.大量減少自己玩遊戲的時間。</p>
-<p>9.Coding時習慣聽音樂，並且不習慣外界有干擾。</p>
-<p>10.每週對RescueTime的固定回報進行總結分析。</p>
-<p>11.用Sleep Better來追蹤自己的睡眠。</p>
-<h2 id="2-_u4EA4_u7E54_u7684_u4EBA_u8207_u4E8B"><a href="#2-_u4EA4_u7E54_u7684_u4EBA_u8207_u4E8B" class="headerlink" title="2.交織的人與事"></a>2.交織的人與事</h2><p>2015年4月27日，我正式開始服為期一年的兵役。兵役期間，我在區公所服役，每天和一般公務員一樣上下班。在公所的替代役主要幫忙進行清掃、雜事處理、排列佈置相關活動等，另外有所擅長的人就需要善用所長，比如我會Photoshop方面的應用，那我就幫各個課室做了許多海報，平均下來一個月在2﹣3張。</p>
-<p>後來參加了臺中市舉辦的替代役創意爭選活動，代表了我們區公所得到了二等獎（可惜沒有拿第一），做了一個關於兵役相關方面資料的查詢APP。不過我做的并沒有太好，當時程式水平不是很夠，現在回頭來看都非常不合格。</p>
-<p>之後民政局讓我做了一個關於役男資料的排版。在最近做了一個關於電話卡正面的封面圖，這兩個都被採納了。</p>
-<p>就我看來，台灣學生仍然過於理想，卻安於現狀。與此同時，對待同輩或小一輩人物，不僅不尊重對方人格，且霸陵現象非常嚴重，而他們自己又並未意識到這些問題，依舊嬉笑怒駡，語言粗俗低下。</p>
-<p>或許是我自身不善於和人交流，或過於冷漠，專注于自身，而不願加入或制止他們，也和我自身能力的不足有很大的關係。我在兵役期間，也多少遇到了被冷漠或無意識排擠，我也并不想要對目前公所所存在替代役，尋求幫助。而我也依舊保持著該需要我協助就站出來幫忙，該冷眼旁觀而專注于自身發展，便無視外界一切人。</p>
-<p>因而2015年我對台灣的學生的大致印象，并不太好。或許是小島國思想封閉以及台灣這十幾年經濟的落寞，台灣學生的思維格局并沒有走出台灣，主要還是以“小確幸”為人生第一要緊事。台灣同樣也是，政治混亂，新聞媒體肆虐，狂舞台灣。無論是食安、黨派、房價、薪資、兩岸等問題，都是台灣人目前還沒辦法解決的各個病痛。台灣雖然醫學世界有名，卻沒辦法合理手術自己身上那顆巨大的腫瘤。</p>
-<h2 id="3-_u5927_u81F4_u90FD_u770B_u4E86_u54EA_u4E9B_u66F8"><a href="#3-_u5927_u81F4_u90FD_u770B_u4E86_u54EA_u4E9B_u66F8" class="headerlink" title="3.大致都看了哪些書"></a>3.大致都看了哪些書</h2><p>今年閱讀量大約在25﹣30本書左右，同時閱讀了大量Blog，網站文章，微信公眾號，簡書、知乎、微博、Twitter資源等等。另外還看了很多電影，但是我只看不喜歡寫影評，因而就沒有進行統計。</p>
-<p>有的書看了不止一次，像《把時間當做朋友》就至少看了三次，仍然覺得還有很多地方可以學習。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/01/2015年回顧與總結/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
 
-  </section>
-
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -628,6 +396,10 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -647,8 +419,17 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="images/head.jpg"
@@ -729,6 +510,23 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u7D50_u5C3E"><span class="nav-number">1.</span> <span class="nav-text">結尾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u2014_u2014_u2014"><span class="nav-number">1.1.</span> <span class="nav-text">———-</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">如有翻譯不足之處，請多多包含與指教。</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -802,6 +600,167 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
   
 
   
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   
 
