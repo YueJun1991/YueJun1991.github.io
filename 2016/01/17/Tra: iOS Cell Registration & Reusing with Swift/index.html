@@ -69,7 +69,7 @@ public func registerClass(cellClass: AnyClass?, forCellWithRe">
 <meta property="og:description" content="如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。
 UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:
 public func registerClass(cellClass: AnyClass?, forCellWithRe">
-<meta property="og:updated_time" content="2016-01-17T12:39:09.000Z">
+<meta property="og:updated_time" content="2016-01-17T12:41:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics">
 <meta name="twitter:description" content="如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。
@@ -306,6 +306,7 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
     }
 }
 </code></pre><p>讓我們來嘗試概括一下這段code以及讓它變得更簡單和安全吧。</p>
+<a id="more"></a>
 <p>首先，把我們的App中每一個的reuse identifier提取出來。這樣我們只能使用自定義cell類中的名字來作為一個缺省的reuse identifier。</p>
 <p>我們可以為Reuseable Views創建一個協議(protocol)並且為UIView的子類提供一個缺省的實現限制。</p>
 <pre><code>protocol ReusableView: class {

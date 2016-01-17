@@ -7,7 +7,7 @@
     <link>http://yoursite.com/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[iOS developer. Like coding and reading.]]></description>
-    <pubDate>Sun, 17 Jan 2016 12:39:09 GMT</pubDate>
+    <pubDate>Sun, 17 Jan 2016 12:41:06 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -17,7 +17,35 @@
       <pubDate>Sat, 16 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
-<p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自]]>
+<p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:</p>
+<pre><code>public func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
+public func registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String)
+</code></pre><p>一種被廣泛使用來處理註冊和出列的解決方法是為reuse identifier(複用識別)宣告一個常數:</p>
+<pre><code>private let reuseIdentifier = &quot;BookCell&quot;
+
+class BookListViewController: UIViewController, UICollectionViewDataSource {
+
+@IBOutlet private weak var collectionView: UICollectionView!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let nib = UINib(nibName: &quot;BookCell&quot;, bundle: nil)
+    self.collectionView.registerNib(nib, forCellWithReuseIdentifier: reuseIdentifier)
+}
+
+func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&gt; UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+
+    if let bookCell = cell as? BookCell {
+        // TODO: configure cell
+    }
+
+    return cell
+    }
+}
+</code></pre><p>讓我們來嘗試概括一下這段code以及讓它變得更簡單和安全吧。</p>]]>
+      
       </description>
       <content:encoded><![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
 <p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:</p>
@@ -48,6 +76,7 @@ func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath ind
     }
 }
 </code></pre><p>讓我們來嘗試概括一下這段code以及讓它變得更簡單和安全吧。</p>
+<a id="more"></a>
 <p>首先，把我們的App中每一個的reuse identifier提取出來。這樣我們只能使用自定義cell類中的名字來作為一個缺省的reuse identifier。</p>
 <p>我們可以為Reuseable Views創建一個協議(protocol)並且為UIView的子類提供一個缺省的實現限制。</p>
 <pre><code>protocol ReusableView: class {
