@@ -293,7 +293,7 @@
 <p>UITableView和UICollectionView提供我們一組非常相似的API來註冊自定義的cell:</p>
 <pre><code>public func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
 public func registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String)
-</code></pre><p>一種被廣泛使用來處理註冊和出列的解決方法是為reuse identifier(複用識別)宣告一個常數:</p>
+</code></pre><p>一種被廣泛使用來處理註冊和出列的處理方法是為reuse identifier(複用識別)宣告一個常數:</p>
 <pre><code>private let reuseIdentifier = &quot;BookCell&quot;
 
 class BookListViewController: UIViewController, UICollectionViewDataSource {
