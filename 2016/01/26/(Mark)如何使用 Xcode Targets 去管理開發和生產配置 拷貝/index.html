@@ -1,0 +1,874 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="translate," />
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="Less complaining, More thinking" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（譯）如何使用 Xcode Targets 去管理開發和生產配置">
+<meta property="og:url" content="http://yoursite.com/2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/index.html">
+<meta property="og:site_name" content="Less complaining, More thinking">
+<meta property="og:description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-target.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-only.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/Targetandscheme.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/image-asset-dev.jpg">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/NewAppIDIcon.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/newplist.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-1-1.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-2-1.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/swift-compiler-flag.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/add-new-file.png">
+<meta property="og:updated_time" content="2016-01-26T02:10:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（譯）如何使用 Xcode Targets 去管理開發和生產配置">
+<meta name="twitter:description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> （譯）如何使用 Xcode Targets 去管理開發和生產配置 | Less complaining, More thinking </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Less complaining, More thinking</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Talk is cheap, show me your coding.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                （譯）如何使用 Xcode Targets 去管理開發和生產配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-01-26T00:00:00+08:00" content="2016-01-26">
+              2016-01-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Translation/" itemprop="url" rel="index">
+                    <span itemprop="name">Translation</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒有一個更好的方法去處理這個問題呢？這就是Eugene將要細緻告訴你的東西。</em></p>
+<p>讓我們正式進入Eugene的教程中。</p>
+<p>在一開始，你們有些人可能會疑惑為什麼應該要為App開發而分別使用數據庫和生產配置。當你想繼續為你的App建立新特性或開發時，你希望分別測試開發版本和已存在的開放的App。標準軟件開發常規是為不同的版本使用不同的環境部署，在我們的例子中，就是用於iPhone App測試。同理，一個App的開發版本經常為生產環境配置使用不同的數據庫（或其他系統，比如分析系統）。這是我們為什麼為不同的環境部署使用不同的服務端或數據庫的其中一個原因。開發者們通常在測試時使用非正式的圖片或數據。在測試或開發環境中，使用測試數據比如”這是測試評論”, “argharghargh(一些亂七八糟的東西)”, “這是另一個測試評論”。你當然不希望你的真實用戶去看到這些信息。在這方面例子中，如果你的App使用分析系統，你可能在測試狀態的時候，傳送出成千上萬的事件。你同樣不想要把測試數據和產品數據混合在一個數據庫中。這就是為什麼推崇將開發和生產環境配置分離的原因。</p>
+<p>當使用兩個分離的環境配置時，你的App需要知道怎麼找到那個它應該正確連接到的配置。有一種流行的方法是在你的主要app delegate中，定義一個全局變量，其來初始化你App的開發或生產模式。</p>
+<pre lang="swift">
+enum environmentType {
+    case development, production
+}
+
+let environment:environmentType = .production
+
+switch environment {
+case .development:
+    // set web service URL to development
+    // set API keys to development
+    print("It's for development")
+case .production:
+    // set web service URL to production
+    // set API keys to production
+    print("It's for production")
+}
+</pre>
+
+<p>這個方法要求你在任何你想改變環境配置的時候，改變那個全局變量。這個方法也許快速和方便，但其有較多的局限。首先，因為我們為開發和生產環境使用單一的bundle ID，我們就不能在單一裝置中安裝兩個App版本。當你想測試開發版本時，你已經在裝置上安裝了生產版本的App，這很不方便。同時，這個方法允許在一個偶然的機會下把開發版本提交到App Store上。如果你忘記更改那個單一的全局變量，你就會把你那個錯誤的App發送給你的使用者。我就記得有一次我忘記在提交之前把這個全局變量更改了，結果使用者們得到了這個App的開發版本。這真是嚇死我了。</p>
+<p>在本文中，我將告訴你一個更好的方式去區分開發和生產配置。也就是說，我們將在Xcode中創建一個開發的target。這個方法將適用於新的和已存在的大量專案，你可以使用任何一個你的App去跟隨這篇教程。</p>
+<p>為適用這個方法，這個app的開發和生產配置將會擁有一樣的基本代碼，但分別使用不同的icon, bundle ID以及指向兩個數據庫。這個分配和提交過程將會非常明白。更重要的是，你的測試人員和管理人員將可以安裝兩個不同版本的App在同一個裝置中，他們完全明白哪個版本是他們要試用的。</p>
+<a id="more"></a>
+<h2 id="u5982_u4F55_u5EFA_u7ACB_u4E00_u500B_u65B0_u7684Target"><a href="#u5982_u4F55_u5EFA_u7ACB_u4E00_u500B_u65B0_u7684Target" class="headerlink" title="如何建立一個新的Target"></a>如何建立一個新的Target</h2><p>那麼如何建立一個開發target在Xcode中呢？我將通過我的模板專案”todo”帶領你一步一步走完整個流程。你也可以使用你自己的專案並且繼續整個流程:</p>
+<ol>
+<li>到專案Navigator面板中，在 <em>Target</em> 區域底下，右鍵已存在的target并選擇 <code>Duplicate</code> 去複製已建立的target。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-target.png" alt="Duplicate-target"></p>
+<ol>
+<li>Xcode會詢問你新的target是否要配置給iPad開發。在這個教程中，我們只選擇 “Duplicate Only”。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-only.png" alt="Duplicate-only"></p>
+<pre><code>**注意：** 如果你的專案支持universal devices, Xcode將不會提示上方信息 
+</code></pre><ol>
+<li>現在我們有一個新的target和一個新的叫做 <code>todo copy</code> 的scheme。我們更換它的名字使其更好理解。</li>
+</ol>
+<ul>
+<li>在 <em>TARGETS</em> 列表中選擇新的target。按下 <code>Enter</code> 編輯文字并寫入適當的名字。我推薦用 “todo Dev”，你可以選擇任何你喜歡的名字。</li>
+<li>接下來，在 “Manage Schemes” 中，選擇你在第一個步驟中建立的新scheme并按下 “Enter” 并將其名字更改的和新的target一樣的名字（就是那個你選擇的新target）。</li>
+</ul>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Targetandscheme.png" alt="Target and scheme"></p>
+<ol>
+<li>第四步可做可不做，但極力推薦你做這步。如果你想要在開發和生產配置在更簡單分辨真假數據，你應該為每個版本用不同的icon和登錄畫面。這會讓你的測試者們更明白他們在使用哪個App，並且有效防止你將開發版本推送上去。 :)</li>
+</ol>
+<p>到 <code>Assets.xcassets</code> 中加入新的icon。右擊icon 之後選擇 App Icons &amp; Launch Images &gt; New iOS App Icon。將新的icon更名為 “AppIcon-Dev” 并加入你自己的圖片。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/image-asset-dev.jpg" alt="image-asset-dev"></p>
+<ol>
+<li>回到專案設定中，選擇你的開發target并更改其bundle identifier。你可以在原本的ID中加入 “Dev” 字段。如果你執行了步驟4，確保你將App icon設置為上一步中所創建的那個。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/NewAppIDIcon.png" alt="New App ID Icon"></p>
+<ol>
+<li><p>Xcode會自動為你的target加入一個plist檔（比如 todo copy-Info.plist）。你可以在你專案的根目錄下找到它。將其名字從”copy”改為”Dev”，并將它放在你原本的plist文件夾下。這會讓你管理文件起來更輕鬆。</p>
+</li>
+<li><p>打開你的開發target中的 “Build Setting”，滾到 “Packaging”，將原本的值改為開發的plist檔（例如 todo Dev.plist）。</p>
+</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/newplist.png" alt="new plist"></p>
+<ol>
+<li>最後，我們會為開發和生產的target同時配置預處理的宏/編譯器的標誌。我們將使用這個標誌以告訴自己現在什麼版本的App是正在運行中的。</li>
+</ol>
+<p>如果是Objective-C專案，到 <code>Build Settings</code> 并滾到 <code>Apple LLVM 7.0 - Preprocessing</code> ，展開 <code>Preprocessor Macros</code> 并分別為 <em>Debug</em> 和 <em>Release</em> 域中加入一個變數。 在開發target中(例如 todo Dev)， 將其值設置為 <code>DEVELOPMENT=1</code>. 在另一邊, 將值設置為 <code>DEVELOPMENT=0</code> 以表明其為生產的版本。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-1-1.png" alt="dev-macro-1"></p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-2-1.png" alt="dev-macro-2"></p>
+<p>在Swift專案中，編譯器不再支持預處理的指令。以代替的是編譯時(complie-time)屬性和構建配置。我們將選擇開發的target，加入一個標誌以表明其為開發的構建。到 <code>Bulid Settings</code> 中并滾到 <code>Swift Compiler - Custom Flags</code> 區域中，將值設置為 <code>-DDEVELOPMENT</code> 以表明其target將在開發的構建中使用。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/swift-compiler-flag.png" alt="swift-compiler-flag"></p>
+<p>現在你建立并配置了開發的target，下一步呢？</p>
+<h2 id="u4F7F_u7528Target_u548C_u5B8F"><a href="#u4F7F_u7528Target_u548C_u5B8F" class="headerlink" title="使用Target和宏"></a>使用Target和宏</h2><p>我們可以在代碼中利用 <code>DEV_VERSION</code> 的宏配置并在專案中執行動態編譯，舉例來說：</p>
+<p><strong>Objective-C:</strong></p>
+<pre lang="swift">
+#if DEVELOPMENT
+#define SERVER_URL @"http://dev.server.com/api/"
+#define API_TOKEN @"DI2023409jf90ew"
+#else
+#define SERVER_URL @"http://prod.server.com/api/"
+#define API_TOKEN @"71a629j0f090232"
+#endif
+</pre>
+
+<p>在Objective-C中，你可以使用 <code>#if</code> 去檢查 <code>DEV_VERSION</code> 的狀態，并以此設置URL與API的鑰匙。</p>
+<p><strong>Swift:</strong></p>
+<pre lang="swift">
+#if DEVELOPMENT
+let SERVER_URL = "http://dev.server.com/api/"
+let API_TOKEN = "DI2023409jf90ew"
+#else
+let SERVER_URL = "http://prod.server.com/api/"
+let API_TOKEN = "71a629j0f090232"
+#endif
+</pre>
+
+<p>在Swift中，你依舊使用 <code>#if</code> 為動態編譯分析當前構建的配置是哪個。但是，以代替使用 <code>#define</code> 而去使用一個原始的常數，我們將在Swift中使用 <code>let</code> 去定義全域常數。</p>
+<pre><code>**注意:** 通常，你會將以上代碼放入一個pp協定中，但它其實依賴於你在哪裡初始化這個App的設置中。
+</code></pre><p>現在當你選擇 “todo Dev” schem并運行專案，你將會自動地依照服務端配置建立開發構建以設置開發環境。你現在已經為你的測試者和管理者準備好上傳開發版本到TestFlight 或 HockeyApp中了。</p>
+<p>之後如果你需要建立一個生產構建，你只要選擇 “todo” scheme即可，沒有任何代碼再需要更改了。</p>
+<h2 id="u4E00_u4E9B_u95DC_u65BC_u7BA1_u7406_u591A_u500BTarget_u7684_u6CE8_u610F_u4E8B_u9805"><a href="#u4E00_u4E9B_u95DC_u65BC_u7BA1_u7406_u591A_u500BTarget_u7684_u6CE8_u610F_u4E8B_u9805" class="headerlink" title="一些關於管理多個Target的注意事項"></a>一些關於管理多個Target的注意事項</h2><ol>
+<li>別忘記當你把一些新的文件加入專案時，選擇多個target以使其同步發生在兩種構建中。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/add-new-file.png" alt="add-new-file"></p>
+<ol>
+<li>如果你使用 Cocoapods，別忘記將新的target加入到你的podfile中。你可以使用 <code>link_with</code> 以指定多個target。你可以在 <a href="https://guides.cocoapods.org" target="_blank" rel="external">Cocoapods documentation</a> 中進一步了解詳細資訊。你的podfile可能會像這樣：</li>
+</ol>
+<pre>source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+workspace 'todo'
+link_with 'todo', 'todo Dev'
+pod 'Mixpanel'
+pod 'AFNetworking'
+</pre>
+
+<ol>
+<li>如果你使用持續集合系統(continuous integration system)，例如<a href="https://travis-ci.org" target="_blank" rel="external">Travis CI</a> 或 <a href="https://jenkins-ci.org" target="_blank" rel="external">Jenkins</a> ，別忘記為兩個target配置構建。</li>
+</ol>
+<p>你認為這次的教程效果如何呢？你又是怎麼管理你的開發和生產構建的呢？留下你的評論并分享你的想法吧。</p>
+<p>原文鏈接: <a href="http://www.appcoda.com/using-xcode-targets/" target="_blank" rel="external">http://www.appcoda.com/using-xcode-targets/</a></p>
+<h2>譯者介紹</h2>
+
+<p>謝岳庭，中文系出身，自學iOS開發，有著异於常人的求知慾。</p>
+<p>你可以在Twitter或<a href="http://www.appcoda.com.tw/forum/" target="_blank" rel="external">AppCoda討論區</a>中聯繫我并隨時歡迎你與我交流。</p>
+<p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
+<p>My Blog: <a href="http://yuejun1991.github.io" target="_blank" rel="external">Less complaing, More thinking</a></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/translate/" rel="tag">#translate</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/17/Tra: iOS Cell Registration & Reusing with Swift/" rel="next" title="(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics">
+                <i class="fa fa-chevron-left"></i> (譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/"
+           data-title="（譯）如何使用 Xcode Targets 去管理開發和生產配置" data-url="http://yoursite.com/2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="images/head.jpg"
+               alt="Yue Jun" />
+          <p class="site-author-name" itemprop="name">Yue Jun</p>
+          <p class="site-description motion-element" itemprop="description">iOS developer. Like coding and reading.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分類</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/rss2.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/YueJun1991" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/Lanaya_HSIEH" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/u/1679063565?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5982_u4F55_u5EFA_u7ACB_u4E00_u500B_u65B0_u7684Target"><span class="nav-number">1.</span> <span class="nav-text">如何建立一個新的Target</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4F7F_u7528Target_u548C_u5B8F"><span class="nav-number">2.</span> <span class="nav-text">使用Target和宏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E00_u4E9B_u95DC_u65BC_u7BA1_u7406_u591A_u500BTarget_u7684_u6CE8_u610F_u4E8B_u9805"><span class="nav-number">3.</span> <span class="nav-text">一些關於管理多個Target的注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">譯者介紹</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yue Jun</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yuejun"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>

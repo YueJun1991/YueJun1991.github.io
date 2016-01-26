@@ -7,8 +7,170 @@
     <link>http://yoursite.com/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[iOS developer. Like coding and reading.]]></description>
-    <pubDate>Mon, 25 Jan 2016 11:13:13 GMT</pubDate>
+    <pubDate>Tue, 26 Jan 2016 02:10:11 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title><![CDATA[（譯）如何使用 Xcode Targets 去管理開發和生產配置]]></title>
+      <link>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/</link>
+      <guid>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/</guid>
+      <pubDate>Mon, 25 Jan 2016 16:00:00 GMT</pubDate>
+      <description>
+      <![CDATA[<p><em>編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒有一個更好的方法去處理這個問題呢？這就是Eugene將要細緻告訴你的東西。</em></p>
+<p>讓我們正式進入Eugene的教程中。</p>
+<p>在一開始，你們有些人可能會疑惑為什麼應該要為App開發而分別使用數據庫和生產配置。當你想繼續為你的App建立新特性或開發時，你希望分別測試開發版本和已存在的開放的App。標準軟件開發常規是為不同的版本使用不同的環境部署，在我們的例子中，就是用於iPhone App測試。同理，一個App的開發版本經常為生產環境配置使用不同的數據庫（或其他系統，比如分析系統）。這是我們為什麼為不同的環境部署使用不同的服務端或數據庫的其中一個原因。開發者們通常在測試時使用非正式的圖片或數據。在測試或開發環境中，使用測試數據比如”這是測試評論”, “argharghargh(一些亂七八糟的東西)”, “這是另一個測試評論”。你當然不希望你的真實用戶去看到這些信息。在這方面例子中，如果你的App使用分析系統，你可能在測試狀態的時候，傳送出成千上萬的事件。你同樣不想要把測試數據和產品數據混合在一個數據庫中。這就是為什麼推崇將開發和生產環境配置分離的原因。</p>
+<p>當使用兩個分離的環境配置時，你的App需要知道怎麼找到那個它應該正確連接到的配置。有一種流行的方法是在你的主要app delegate中，定義一個全局變量，其來初始化你App的開發或生產模式。</p>
+<pre lang="swift">
+enum environmentType {
+    case development, production
+}
+
+let environment:environmentType = .production
+
+switch environment {
+case .development:
+    // set web service URL to development
+    // set API keys to development
+    print("It's for development")
+case .production:
+    // set web service URL to production
+    // set API keys to production
+    print("It's for production")
+}
+</pre>
+
+<p>這個方法要求你在任何你想改變環境配置的時候，改變那個全局變量。這個方法也許快速和方便，但其有較多的局限。首先，因為我們為開發和生產環境使用單一的bundle ID，我們就不能在單一裝置中安裝兩個App版本。當你想測試開發版本時，你已經在裝置上安裝了生產版本的App，這很不方便。同時，這個方法允許在一個偶然的機會下把開發版本提交到App Store上。如果你忘記更改那個單一的全局變量，你就會把你那個錯誤的App發送給你的使用者。我就記得有一次我忘記在提交之前把這個全局變量更改了，結果使用者們得到了這個App的開發版本。這真是嚇死我了。</p>
+<p>在本文中，我將告訴你一個更好的方式去區分開發和生產配置。也就是說，我們將在Xcode中創建一個開發的target。這個方法將適用於新的和已存在的大量專案，你可以使用任何一個你的App去跟隨這篇教程。</p>
+<p>為適用這個方法，這個app的開發和生產配置將會擁有一樣的基本代碼，但分別使用不同的icon, bundle ID以及指向兩個數據庫。這個分配和提交過程將會非常明白。更重要的是，你的測試人員和管理人員將可以安裝兩個不同版本的App在同一個裝置中，他們完全明白哪個版本是他們要試用的。</p>]]>
+      
+      </description>
+      <content:encoded><![CDATA[<p><em>編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒有一個更好的方法去處理這個問題呢？這就是Eugene將要細緻告訴你的東西。</em></p>
+<p>讓我們正式進入Eugene的教程中。</p>
+<p>在一開始，你們有些人可能會疑惑為什麼應該要為App開發而分別使用數據庫和生產配置。當你想繼續為你的App建立新特性或開發時，你希望分別測試開發版本和已存在的開放的App。標準軟件開發常規是為不同的版本使用不同的環境部署，在我們的例子中，就是用於iPhone App測試。同理，一個App的開發版本經常為生產環境配置使用不同的數據庫（或其他系統，比如分析系統）。這是我們為什麼為不同的環境部署使用不同的服務端或數據庫的其中一個原因。開發者們通常在測試時使用非正式的圖片或數據。在測試或開發環境中，使用測試數據比如”這是測試評論”, “argharghargh(一些亂七八糟的東西)”, “這是另一個測試評論”。你當然不希望你的真實用戶去看到這些信息。在這方面例子中，如果你的App使用分析系統，你可能在測試狀態的時候，傳送出成千上萬的事件。你同樣不想要把測試數據和產品數據混合在一個數據庫中。這就是為什麼推崇將開發和生產環境配置分離的原因。</p>
+<p>當使用兩個分離的環境配置時，你的App需要知道怎麼找到那個它應該正確連接到的配置。有一種流行的方法是在你的主要app delegate中，定義一個全局變量，其來初始化你App的開發或生產模式。</p>
+<pre lang="swift">
+enum environmentType {
+    case development, production
+}
+
+let environment:environmentType = .production
+
+switch environment {
+case .development:
+    // set web service URL to development
+    // set API keys to development
+    print("It's for development")
+case .production:
+    // set web service URL to production
+    // set API keys to production
+    print("It's for production")
+}
+</pre>
+
+<p>這個方法要求你在任何你想改變環境配置的時候，改變那個全局變量。這個方法也許快速和方便，但其有較多的局限。首先，因為我們為開發和生產環境使用單一的bundle ID，我們就不能在單一裝置中安裝兩個App版本。當你想測試開發版本時，你已經在裝置上安裝了生產版本的App，這很不方便。同時，這個方法允許在一個偶然的機會下把開發版本提交到App Store上。如果你忘記更改那個單一的全局變量，你就會把你那個錯誤的App發送給你的使用者。我就記得有一次我忘記在提交之前把這個全局變量更改了，結果使用者們得到了這個App的開發版本。這真是嚇死我了。</p>
+<p>在本文中，我將告訴你一個更好的方式去區分開發和生產配置。也就是說，我們將在Xcode中創建一個開發的target。這個方法將適用於新的和已存在的大量專案，你可以使用任何一個你的App去跟隨這篇教程。</p>
+<p>為適用這個方法，這個app的開發和生產配置將會擁有一樣的基本代碼，但分別使用不同的icon, bundle ID以及指向兩個數據庫。這個分配和提交過程將會非常明白。更重要的是，你的測試人員和管理人員將可以安裝兩個不同版本的App在同一個裝置中，他們完全明白哪個版本是他們要試用的。</p>
+<a id="more"></a>
+<h2 id="u5982_u4F55_u5EFA_u7ACB_u4E00_u500B_u65B0_u7684Target"><a href="#u5982_u4F55_u5EFA_u7ACB_u4E00_u500B_u65B0_u7684Target" class="headerlink" title="如何建立一個新的Target"></a>如何建立一個新的Target</h2><p>那麼如何建立一個開發target在Xcode中呢？我將通過我的模板專案”todo”帶領你一步一步走完整個流程。你也可以使用你自己的專案並且繼續整個流程:</p>
+<ol>
+<li>到專案Navigator面板中，在 <em>Target</em> 區域底下，右鍵已存在的target并選擇 <code>Duplicate</code> 去複製已建立的target。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-target.png" alt="Duplicate-target"></p>
+<ol>
+<li>Xcode會詢問你新的target是否要配置給iPad開發。在這個教程中，我們只選擇 “Duplicate Only”。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Duplicate-only.png" alt="Duplicate-only"></p>
+<pre><code>**注意：** 如果你的專案支持universal devices, Xcode將不會提示上方信息 
+</code></pre><ol>
+<li>現在我們有一個新的target和一個新的叫做 <code>todo copy</code> 的scheme。我們更換它的名字使其更好理解。</li>
+</ol>
+<ul>
+<li>在 <em>TARGETS</em> 列表中選擇新的target。按下 <code>Enter</code> 編輯文字并寫入適當的名字。我推薦用 “todo Dev”，你可以選擇任何你喜歡的名字。</li>
+<li>接下來，在 “Manage Schemes” 中，選擇你在第一個步驟中建立的新scheme并按下 “Enter” 并將其名字更改的和新的target一樣的名字（就是那個你選擇的新target）。</li>
+</ul>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/Targetandscheme.png" alt="Target and scheme"></p>
+<ol>
+<li>第四步可做可不做，但極力推薦你做這步。如果你想要在開發和生產配置在更簡單分辨真假數據，你應該為每個版本用不同的icon和登錄畫面。這會讓你的測試者們更明白他們在使用哪個App，並且有效防止你將開發版本推送上去。 :)</li>
+</ol>
+<p>到 <code>Assets.xcassets</code> 中加入新的icon。右擊icon 之後選擇 App Icons &amp; Launch Images &gt; New iOS App Icon。將新的icon更名為 “AppIcon-Dev” 并加入你自己的圖片。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/image-asset-dev.jpg" alt="image-asset-dev"></p>
+<ol>
+<li>回到專案設定中，選擇你的開發target并更改其bundle identifier。你可以在原本的ID中加入 “Dev” 字段。如果你執行了步驟4，確保你將App icon設置為上一步中所創建的那個。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/NewAppIDIcon.png" alt="New App ID Icon"></p>
+<ol>
+<li><p>Xcode會自動為你的target加入一個plist檔（比如 todo copy-Info.plist）。你可以在你專案的根目錄下找到它。將其名字從”copy”改為”Dev”，并將它放在你原本的plist文件夾下。這會讓你管理文件起來更輕鬆。</p>
+</li>
+<li><p>打開你的開發target中的 “Build Setting”，滾到 “Packaging”，將原本的值改為開發的plist檔（例如 todo Dev.plist）。</p>
+</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/newplist.png" alt="new plist"></p>
+<ol>
+<li>最後，我們會為開發和生產的target同時配置預處理的宏/編譯器的標誌。我們將使用這個標誌以告訴自己現在什麼版本的App是正在運行中的。</li>
+</ol>
+<p>如果是Objective-C專案，到 <code>Build Settings</code> 并滾到 <code>Apple LLVM 7.0 - Preprocessing</code> ，展開 <code>Preprocessor Macros</code> 并分別為 <em>Debug</em> 和 <em>Release</em> 域中加入一個變數。 在開發target中(例如 todo Dev)， 將其值設置為 <code>DEVELOPMENT=1</code>. 在另一邊, 將值設置為 <code>DEVELOPMENT=0</code> 以表明其為生產的版本。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-1-1.png" alt="dev-macro-1"></p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-2-1.png" alt="dev-macro-2"></p>
+<p>在Swift專案中，編譯器不再支持預處理的指令。以代替的是編譯時(complie-time)屬性和構建配置。我們將選擇開發的target，加入一個標誌以表明其為開發的構建。到 <code>Bulid Settings</code> 中并滾到 <code>Swift Compiler - Custom Flags</code> 區域中，將值設置為 <code>-DDEVELOPMENT</code> 以表明其target將在開發的構建中使用。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/swift-compiler-flag.png" alt="swift-compiler-flag"></p>
+<p>現在你建立并配置了開發的target，下一步呢？</p>
+<h2 id="u4F7F_u7528Target_u548C_u5B8F"><a href="#u4F7F_u7528Target_u548C_u5B8F" class="headerlink" title="使用Target和宏"></a>使用Target和宏</h2><p>我們可以在代碼中利用 <code>DEV_VERSION</code> 的宏配置并在專案中執行動態編譯，舉例來說：</p>
+<p><strong>Objective-C:</strong></p>
+<pre lang="swift">
+#if DEVELOPMENT
+#define SERVER_URL @"http://dev.server.com/api/"
+#define API_TOKEN @"DI2023409jf90ew"
+#else
+#define SERVER_URL @"http://prod.server.com/api/"
+#define API_TOKEN @"71a629j0f090232"
+#endif
+</pre>
+
+<p>在Objective-C中，你可以使用 <code>#if</code> 去檢查 <code>DEV_VERSION</code> 的狀態，并以此設置URL與API的鑰匙。</p>
+<p><strong>Swift:</strong></p>
+<pre lang="swift">
+#if DEVELOPMENT
+let SERVER_URL = "http://dev.server.com/api/"
+let API_TOKEN = "DI2023409jf90ew"
+#else
+let SERVER_URL = "http://prod.server.com/api/"
+let API_TOKEN = "71a629j0f090232"
+#endif
+</pre>
+
+<p>在Swift中，你依舊使用 <code>#if</code> 為動態編譯分析當前構建的配置是哪個。但是，以代替使用 <code>#define</code> 而去使用一個原始的常數，我們將在Swift中使用 <code>let</code> 去定義全域常數。</p>
+<pre><code>**注意:** 通常，你會將以上代碼放入一個pp協定中，但它其實依賴於你在哪裡初始化這個App的設置中。
+</code></pre><p>現在當你選擇 “todo Dev” schem并運行專案，你將會自動地依照服務端配置建立開發構建以設置開發環境。你現在已經為你的測試者和管理者準備好上傳開發版本到TestFlight 或 HockeyApp中了。</p>
+<p>之後如果你需要建立一個生產構建，你只要選擇 “todo” scheme即可，沒有任何代碼再需要更改了。</p>
+<h2 id="u4E00_u4E9B_u95DC_u65BC_u7BA1_u7406_u591A_u500BTarget_u7684_u6CE8_u610F_u4E8B_u9805"><a href="#u4E00_u4E9B_u95DC_u65BC_u7BA1_u7406_u591A_u500BTarget_u7684_u6CE8_u610F_u4E8B_u9805" class="headerlink" title="一些關於管理多個Target的注意事項"></a>一些關於管理多個Target的注意事項</h2><ol>
+<li>別忘記當你把一些新的文件加入專案時，選擇多個target以使其同步發生在兩種構建中。</li>
+</ol>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2016/01/add-new-file.png" alt="add-new-file"></p>
+<ol>
+<li>如果你使用 Cocoapods，別忘記將新的target加入到你的podfile中。你可以使用 <code>link_with</code> 以指定多個target。你可以在 <a href="https://guides.cocoapods.org" target="_blank" rel="external">Cocoapods documentation</a> 中進一步了解詳細資訊。你的podfile可能會像這樣：</li>
+</ol>
+<pre>source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+workspace 'todo'
+link_with 'todo', 'todo Dev'
+pod 'Mixpanel'
+pod 'AFNetworking'
+</pre>
+
+<ol>
+<li>如果你使用持續集合系統(continuous integration system)，例如<a href="https://travis-ci.org" target="_blank" rel="external">Travis CI</a> 或 <a href="https://jenkins-ci.org" target="_blank" rel="external">Jenkins</a> ，別忘記為兩個target配置構建。</li>
+</ol>
+<p>你認為這次的教程效果如何呢？你又是怎麼管理你的開發和生產構建的呢？留下你的評論并分享你的想法吧。</p>
+<p>原文鏈接: <a href="http://www.appcoda.com/using-xcode-targets/" target="_blank" rel="external">http://www.appcoda.com/using-xcode-targets/</a></p>
+<h2>譯者介紹</h2>
+
+<p>謝岳庭，中文系出身，自學iOS開發，有著异於常人的求知慾。</p>
+<p>你可以在Twitter或<a href="http://www.appcoda.com.tw/forum/" target="_blank" rel="external">AppCoda討論區</a>中聯繫我并隨時歡迎你與我交流。</p>
+<p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
+<p>My Blog: <a href="http://yuejun1991.github.io" target="_blank" rel="external">Less complaing, More thinking</a></p>
+]]></content:encoded>
+      <comments>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/#disqus_thread</comments>
+    </item>
     
     <item>
       <title><![CDATA[(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics]]></title>
