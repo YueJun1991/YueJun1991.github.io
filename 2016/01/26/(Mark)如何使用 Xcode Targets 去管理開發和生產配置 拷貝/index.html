@@ -61,7 +61,7 @@
 
 <meta name="description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
 <meta property="og:type" content="article">
-<meta property="og:title" content="（譯）如何使用 Xcode Targets 去管理開發和生產配置">
+<meta property="og:title" content="(譯)如何使用 Xcode Targets 去管理開發和生產配置">
 <meta property="og:url" content="http://yoursite.com/2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/index.html">
 <meta property="og:site_name" content="Less complaining, More thinking">
 <meta property="og:description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
@@ -75,9 +75,9 @@
 <meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/dev-macro-2-1.png">
 <meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/swift-compiler-flag.png">
 <meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2016/01/add-new-file.png">
-<meta property="og:updated_time" content="2016-01-26T02:12:51.000Z">
+<meta property="og:updated_time" content="2016-02-23T02:05:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="（譯）如何使用 Xcode Targets 去管理開發和生產配置">
+<meta name="twitter:title" content="(譯)如何使用 Xcode Targets 去管理開發和生產配置">
 <meta name="twitter:description" content="編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒">
 
 
@@ -96,7 +96,7 @@
   };
 </script>
 
-  <title> （譯）如何使用 Xcode Targets 去管理開發和生產配置 | Less complaining, More thinking </title>
+  <title> (譯)如何使用 Xcode Targets 去管理開發和生產配置 | Less complaining, More thinking </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -224,7 +224,7 @@
             
             
               
-                （譯）如何使用 Xcode Targets 去管理開發和生產配置
+                (譯)如何使用 Xcode Targets 去管理開發和生產配置
               
             
           </h1>
@@ -292,25 +292,7 @@
 <p>讓我們正式進入Eugene的教程中。</p>
 <p>在一開始，你們有些人可能會疑惑為什麼應該要為App開發而分別使用數據庫和生產配置。當你想繼續為你的App建立新特性或開發時，你希望分別測試開發版本和已存在的開放的App。標準軟件開發常規是為不同的版本使用不同的環境部署，在我們的例子中，就是用於iPhone App測試。同理，一個App的開發版本經常為生產環境配置使用不同的數據庫（或其他系統，比如分析系統）。這是我們為什麼為不同的環境部署使用不同的服務端或數據庫的其中一個原因。開發者們通常在測試時使用非正式的圖片或數據。在測試或開發環境中，使用測試數據比如”這是測試評論”, “argharghargh(一些亂七八糟的東西)”, “這是另一個測試評論”。你當然不希望你的真實用戶去看到這些信息。在這方面例子中，如果你的App使用分析系統，你可能在測試狀態的時候，傳送出成千上萬的事件。你同樣不想要把測試數據和產品數據混合在一個數據庫中。這就是為什麼推崇將開發和生產環境配置分離的原因。</p>
 <p>當使用兩個分離的環境配置時，你的App需要知道怎麼找到那個它應該正確連接到的配置。有一種流行的方法是在你的主要app delegate中，定義一個全局變量，其來初始化你App的開發或生產模式。</p>
-<pre lang="swift">
-enum environmentType {
-    case development, production
-}
-
-let environment:environmentType = .production
-
-switch environment {
-case .development:
-    // set web service URL to development
-    // set API keys to development
-    print("It's for development")
-case .production:
-    // set web service URL to production
-    // set API keys to production
-    print("It's for production")
-}
-</pre>
-
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">environmentType</span> &#123;</span></span><br><span class="line">    <span class="keyword">case</span> development, production</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let <span class="symbol">environment:</span>environmentType = .production</span><br><span class="line"></span><br><span class="line">switch environment &#123;</span><br><span class="line"><span class="keyword">case</span> .<span class="symbol">development:</span></span><br><span class="line">    /<span class="regexp">/ set web service URL to development</span><br><span class="line">    /</span><span class="regexp">/ set API keys to development</span><br><span class="line">    print("It's for development")</span><br><span class="line">case .production:</span><br><span class="line">    /</span><span class="regexp">/ set web service URL to production</span><br><span class="line">    /</span><span class="regexp">/ set API keys to production</span><br><span class="line">    print("It's for production")</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>這個方法要求你在任何你想改變環境配置的時候，改變那個全局變量。這個方法也許快速和方便，但其有較多的局限。首先，因為我們為開發和生產環境使用單一的bundle ID，我們就不能在單一裝置中安裝兩個App版本。當你想測試開發版本時，你已經在裝置上安裝了生產版本的App，這很不方便。同時，這個方法允許在一個偶然的機會下把開發版本提交到App Store上。如果你忘記更改那個單一的全局變量，你就會把你那個錯誤的App發送給你的使用者。我就記得有一次我忘記在提交之前把這個全局變量更改了，結果使用者們得到了這個App的開發版本。這真是嚇死我了。</p>
 <p>在本文中，我將告訴你一個更好的方式去區分開發和生產配置。也就是說，我們將在Xcode中創建一個開發的target。這個方法將適用於新的和已存在的大量專案，你可以使用任何一個你的App去跟隨這篇教程。</p>
 <p>為適用這個方法，這個app的開發和生產配置將會擁有一樣的基本代碼，但分別使用不同的icon, bundle ID以及指向兩個數據庫。這個分配和提交過程將會非常明白。更重要的是，你的測試人員和管理人員將可以安裝兩個不同版本的App在同一個裝置中，他們完全明白哪個版本是他們要試用的。</p>
@@ -826,7 +808,7 @@ pod 'AFNetworking'
     <script type="text/javascript">
       var disqus_shortname = 'MorethinkingYueJun';
       var disqus_identifier = '2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/';
-      var disqus_title = '（譯）如何使用 Xcode Targets 去管理開發和生產配置';
+      var disqus_title = '(譯)如何使用 Xcode Targets 去管理開發和生產配置';
       var disqus_url = 'http://yoursite.com/2016/01/26/(Mark)如何使用 Xcode Targets 去管理開發和生產配置 拷貝/';
 
       function run_disqus_script(disqus_script){
