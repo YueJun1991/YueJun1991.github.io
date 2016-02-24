@@ -12,8 +12,8 @@
     
     <item>
       <title><![CDATA[(譯)如何使用 Xcode Targets 去管理開發和生產配置]]></title>
-      <link>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/</link>
-      <guid>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/</guid>
+      <link>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/</link>
+      <guid>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/</guid>
       <pubDate>Mon, 25 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p><em>編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒有一個更好的方法去處理這個問題呢？這就是Eugene將要細緻告訴你的東西。</em></p>
@@ -111,13 +111,13 @@ pod 'AFNetworking'
 <p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
 <p>My Blog: <a href="http://yuejun1991.github.io" target="_blank" rel="external">Less complaing, More thinking</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/26/(Mark)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE%20%E6%8B%B7%E8%B2%9D/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics]]></title>
-      <link>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/</link>
-      <guid>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/</guid>
+      <link>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</link>
+      <guid>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</guid>
       <pubDate>Sat, 16 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
@@ -157,13 +157,13 @@ pod 'AFNetworking'
 <p>本文以獲得原作者的翻譯許可。</p>
 <h5 id="u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002"><a href="#u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002" class="headerlink" title="如有翻譯不足之處，請多多包含與指教。"></a>如有翻譯不足之處，請多多包含與指教。</h5><p><a href="https://medium.com/@gonzalezreal/ios-cell-registration-reusing-with-swift-protocol-extensions-and-generics-c5ac4fb5b75e#.jnkx73nhv" target="_blank" rel="external">原文地址在此</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/17/Tra:%20iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[(譯)如何在iOS 9中使用Core Spotlight框架]]></title>
-      <link>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</link>
-      <guid>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</guid>
+      <link>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</link>
+      <guid>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</guid>
       <pubDate>Thu, 14 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
@@ -485,7 +485,7 @@ import MobileCoreServices
 <p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
 <p>My Blog: <a href="/">https://yuejun1991.github.io</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/15/%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/#disqus_thread</comments>
     </item>
     
     <item>
