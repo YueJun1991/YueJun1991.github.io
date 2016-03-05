@@ -7,13 +7,13 @@
     <link>http://yoursite.com/</link>
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     <description><![CDATA[iOS developer. Like coding and reading.]]></description>
-    <pubDate>Thu, 03 Mar 2016 10:09:44 GMT</pubDate>
+    <pubDate>Sat, 05 Mar 2016 13:10:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title><![CDATA[《活出生命的意義》閱讀筆記]]></title>
-      <link>http://yoursite.com/2016/03/03/%E3%80%8A%E6%B4%BB%E5%87%BA%E7%94%9F%E5%91%BD%E7%9A%84%E6%84%8F%E7%BE%A9%E3%80%8B%E9%96%B1%E8%AE%80%E7%AD%86%E8%A8%98/</link>
-      <guid>http://yoursite.com/2016/03/03/%E3%80%8A%E6%B4%BB%E5%87%BA%E7%94%9F%E5%91%BD%E7%9A%84%E6%84%8F%E7%BE%A9%E3%80%8B%E9%96%B1%E8%AE%80%E7%AD%86%E8%A8%98/</guid>
+      <link>http://yoursite.com/2016/03/03/The%20read%20note%20about%20Man's%20Search%20For%20meaning/</link>
+      <guid>http://yoursite.com/2016/03/03/The%20read%20note%20about%20Man's%20Search%20For%20meaning/</guid>
       <pubDate>Wed, 02 Mar 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p><img src="http://i915.photobucket.com/albums/ac360/aahkan/a0765cd3.jpg" alt="意義"></p>
@@ -66,13 +66,13 @@
 <h2 id="u865F_u5916"><a href="#u865F_u5916" class="headerlink" title="號外"></a>號外</h2><p>插一句剛剛看到的話：</p>
 <p>一個人命中最大的幸運，莫過於在他的人生中途，即在他年富力強的時候發現了自己生活的使命。 ──《人類群星閃耀時》</p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/03/03/%E3%80%8A%E6%B4%BB%E5%87%BA%E7%94%9F%E5%91%BD%E7%9A%84%E6%84%8F%E7%BE%A9%E3%80%8B%E9%96%B1%E8%AE%80%E7%AD%86%E8%A8%98/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/03/03/The%20read%20note%20about%20Man's%20Search%20For%20meaning/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[(譯)如何使用 Xcode Targets 去管理開發和生產配置]]></title>
-      <link>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/</link>
-      <guid>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/</guid>
+      <link>http://yoursite.com/2016/01/26/How%20to%20use%20Xcode%20Targets/</link>
+      <guid>http://yoursite.com/2016/01/26/How%20to%20use%20Xcode%20Targets/</guid>
       <pubDate>Mon, 25 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p><em>編者注釋：感謝Eugene Trapeznikov所貢獻的這篇文章。想象一下，你已經完成了你的App的開發與測試，你已經做好準備要提交產品版本了。而現在有一個問題，有一些web服務端的URL指向了測試的服務端，然後這個API鑰匙是為測試環境所配置的。在將這個App提交給Apple審核之前，你當然需要為了產品去修改所有的API鑰匙和URL，這聽起來很正確不是嗎？在來回改變開發和生產環境的值之前，有沒有一個更好的方法去處理這個問題呢？這就是Eugene將要細緻告訴你的東西。</em></p>
@@ -170,13 +170,13 @@ pod 'AFNetworking'
 <p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
 <p>My Blog: <a href="http://yuejun1991.github.io" target="_blank" rel="external">Less complaing, More thinking</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/26/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20Xcode%20Targets%20%E5%8E%BB%E7%AE%A1%E7%90%86%E9%96%8B%E7%99%BC%E5%92%8C%E7%94%9F%E7%94%A2%E9%85%8D%E7%BD%AE/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/26/How%20to%20use%20Xcode%20Targets/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[(譯)iOS Cell Registration & Reusing with Swift Protocol Extensions and Generics]]></title>
-      <link>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</link>
-      <guid>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</guid>
+      <link>http://yoursite.com/2016/01/17/iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</link>
+      <guid>http://yoursite.com/2016/01/17/iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/</guid>
       <pubDate>Sat, 16 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p>如果你使用Storyboards的話，你應該會經常碰到這些情形：為UITableView和UIColloectionView註冊(register)自定義的cell。</p>
@@ -216,13 +216,13 @@ pod 'AFNetworking'
 <p>本文以獲得原作者的翻譯許可。</p>
 <h5 id="u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002"><a href="#u5982_u6709_u7FFB_u8B6F_u4E0D_u8DB3_u4E4B_u8655_uFF0C_u8ACB_u591A_u591A_u5305_u542B_u8207_u6307_u6559_u3002" class="headerlink" title="如有翻譯不足之處，請多多包含與指教。"></a>如有翻譯不足之處，請多多包含與指教。</h5><p><a href="https://medium.com/@gonzalezreal/ios-cell-registration-reusing-with-swift-protocol-extensions-and-generics-c5ac4fb5b75e#.jnkx73nhv" target="_blank" rel="external">原文地址在此</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/17/(%E8%AD%AF)iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/17/iOS%20Cell%20Registration%20&%20Reusing%20with%20Swift%20Protocol%20Extensions%20and%20Generics/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[(譯)如何在iOS 9中使用Core Spotlight框架]]></title>
-      <link>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</link>
-      <guid>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/</guid>
+      <link>http://yoursite.com/2016/01/15/How%20to%20use%20Core%20Spotlight%20framework%20in%20iOS%209/</link>
+      <guid>http://yoursite.com/2016/01/15/How%20to%20use%20Core%20Spotlight%20framework%20in%20iOS%209/</guid>
       <pubDate>Thu, 14 Jan 2016 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<h3 id="u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F"><a href="#u672C_u6587_u70BAHow_to_Use_Core_Spotlight_Framework_in_iOS_9_u7684_u7FFB_u8B6F" class="headerlink" title="本文為How to Use Core Spotlight Framework in iOS 9的翻譯"></a>本文為<a href="http://www.appcoda.com/core-spotlight-framework/">How to Use Core Spotlight Framework in iOS 9</a>的翻譯</h3><p>每一次新iOS版本的到來都會帶給全世界所有的開發者們新“東西”并進階已存在的技術。無疑，最新的版本iOS 9，也不會置身于這個傳統之外。開發者們再一次有了新的框架與API以讓他們的App獲得更高水平。其中一個新東西就是 <strong>Core Spotlight</strong> 框架，它靜靜地等待在那邊讓開發者們使用它新的API。</p>
@@ -544,13 +544,13 @@ import MobileCoreServices
 <p>My Twitter: <a href="https://twitter.com/Lanaya_HSIEH" target="_blank" rel="external">@Lanaya_HSIEH</a></p>
 <p>My Blog: <a href="/">https://yuejun1991.github.io</a></p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/15/(%E8%AD%AF)%E5%A6%82%E4%BD%95%E5%9C%A8iOS%209%E4%B8%AD%E4%BD%BF%E7%94%A8Core%20Spotlight%E6%A1%86%E6%9E%B6/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/15/How%20to%20use%20Core%20Spotlight%20framework%20in%20iOS%209/#disqus_thread</comments>
     </item>
     
     <item>
       <title><![CDATA[2015年回顧與總結]]></title>
-      <link>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/</link>
-      <guid>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/</guid>
+      <link>http://yoursite.com/2016/01/01/The%20review%20about%202015/</link>
+      <guid>http://yoursite.com/2016/01/01/The%20review%20about%202015/</guid>
       <pubDate>Thu, 31 Dec 2015 16:00:00 GMT</pubDate>
       <description>
       <![CDATA[<p>2015年，是我人生中眾多重大變化的其中一年，並且非常關鍵。我希望能對2015年進行足夠的回顧與總結，從而分析出我變化了什麼，強化了什麼，對什麼還有不足。</p>
@@ -688,7 +688,7 @@ import MobileCoreServices
 <p>17.Kindle</p>
 <p>18.網易公開課</p>
 ]]></content:encoded>
-      <comments>http://yoursite.com/2016/01/01/2015%E5%B9%B4%E5%9B%9E%E9%A1%A7%E8%88%87%E7%B8%BD%E7%B5%90/#disqus_thread</comments>
+      <comments>http://yoursite.com/2016/01/01/The%20review%20about%202015/#disqus_thread</comments>
     </item>
     
   </channel>
